@@ -1,0 +1,53 @@
+<div class="body">
+<div class="notice">
+  <% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
+  <% end %>
+</div>
+<% if @user.errors.any? %>
+  <div id="error_explanation" class="alert alert-danger">
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li class="error_message">error</li>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<h2>User info</h2>
+
+
+<%= form_for(@user) do |f| %>
+    <div class="form-group has-icon">
+        <label class="control-label sr-only" for="inputEmail">Name</label>
+        <%= f.text_field :name, autofocus: true, class:"form-control", id:"inputEmail", placeholder:"名前"%>
+        <span class="fa fa-user form-control-icon" aria-hidden="true"></span>
+    </div> 
+    <div class="form-group has-icon">
+    <div class="user-edit-image">
+        <%= attachment_image_tag @user, :profile_image , :fill, 60, 60, fallback: "no_image.jpg", class: "img-circle pull-left profile-thumb" %>
+    </div>
+    <label class="control-label sr-only" for="inputEmail">ProfileImage</label>
+    <%= f.attachment_field :profile_image, placeholder: "プロフィール画像", class: "user-edit-form" %>
+    <div>
+    <label class="control-label sr-only" for="inputEmail">Introduction</label>
+        <%= f.text_field :introduction, autofocus: true, class:"form-control", id:"inputEmail", placeholder:"自己紹介"%>
+        <span class="fa fa-user form-control-icon" aria-hidden="true"></span>
+      
+    </div>
+
+</div>
+    <%= f.submit "Update User", class:"btn btn-lg btn-block btn-base-1 mt-20" %>
+<% end %>
+  
+</div>
+<footer>
+  <div class='container'>
+    <div class='row'>
+      <div class='col-xs-3 col-xs-offset-9'>
+        <p>CopyRight Infratop.inc</p>
+      </div>
+    </div>
+  </div>
+</footer>
